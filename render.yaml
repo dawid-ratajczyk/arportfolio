@@ -1,0 +1,9 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Repo root = ten katalog (index.html, katalog.html, itd.).
+services:
+  - type: web
+    name: portfolio
+    runtime: static
+    # Brak npm/webpack; pliki są już gotowe do serwowania.
+    buildCommand: 'true'
+    staticPublishPath: .
