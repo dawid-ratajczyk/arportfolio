@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Andrzej Ratajczyk — portfolio: linoryt i malarstwo." />
+  <title>Andrzej Ratajczyk — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0f;
+      --bg-subtle: #16161c;
+      --card: #121218;
+      --fg: #fafafa;
+      --muted: #a1a1aa;
+      --line: #2e2e36;
+      --line-strong: #3f3f4a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--fg);
+      line-height: 1.55;
+      background: var(--bg);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 100% 6rem;
+      background-position: 0 4.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: clamp(18rem, 48vh, 34rem);
+      pointer-events: none;
+      z-index: 0;
+      background-color: var(--bg);
+      background-image: linear-gradient(
+        to bottom,
+        rgba(12, 12, 15, 0.55) 0%,
+        rgba(12, 12, 15, 0.82) 38%,
+        var(--bg) 100%
+      );
+      background-size: 100% 100%;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+    }
+
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.055;
+      mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 76rem;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    .catalog-header-panel {
+      margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
+      padding: clamp(1.15rem, 2.8vw, 1.75rem);
+      min-width: 0;
+      background: linear-gradient(168deg, rgba(22, 22, 30, 0.92) 0%, rgba(12, 12, 16, 0.88) 48%, rgba(14, 14, 18, 0.94) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.05) inset,
+        0 28px 56px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .catalog-header-panel {
+        background: rgba(18, 18, 24, 0.94);
+      }
+    }
+
+    .catalog-header-panel__actions-row {
+      margin-bottom: clamp(1rem, 2vw, 1.35rem);
+      padding-bottom: clamp(0.85rem, 1.5vw, 1.1rem);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .catalog-top__bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 0.75rem;
+    }
+
+    .catalog-top__bar-start {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 0.75rem;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .catalog-top__bar .catalog-top__contact {
+      margin-left: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.15rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn--solid {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .btn--solid:hover,
+    .btn--solid:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .btn--ghost:hover,
+    .btn--ghost:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding: clamp(1.15rem, 3vw, 1.85rem) 0 4rem;
+    }
+
+    .tabs.tabs--segmented {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.2rem;
+      margin: 0;
+      padding: 0.3rem;
+      border: none;
+      border-bottom: none;
+      background: rgba(0, 0, 0, 0.32);
+      border-radius: 11px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .tabs.tabs--segmented .tabs__btn {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.2rem;
+      margin-bottom: 0;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .tabs.tabs--segmented .tabs__btn:hover {
+      color: #e4e4e7;
+    }
+
+    .tabs.tabs--segmented .tabs__btn.is-active {
+      color: var(--fg);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(0.75rem, 2vw, 1rem);
+    }
+
+    @media (min-width: 36rem) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .gallery-cell {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .gallery-cell:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .gallery-cell__img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      background: #0a0a0c;
+    }
+
+    .gallery-cell__cap {
+      padding: 0.65rem 0.85rem 0.75rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--fg);
+      border-top: 1px solid var(--line);
+    }
+
+    .gallery-cell__meta {
+      display: block;
+      margin-top: 0.25rem;
+      font-family: "Inter", sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .gallery-cell__note {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fca5a5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(1rem, 2vw, 1.25rem);
+    }
+
+    @media (min-width: 36rem) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    article.card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    article.card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .card-thumb {
+      position: relative;
+      background: var(--bg-subtle);
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .card-thumb-inner {
+      position: relative;
+      background: var(--bg-subtle);
+      padding: 0;
+      border: none;
+    }
+
+    .card-thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      background: #0a0a0c;
+    }
+
+    .card-thumb .thumb-fallback {
+      display: none;
+      aspect-ratio: 4 / 3;
+      align-items: center;
+      justify-content: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      letter-spacing: 0.08em;
+      color: rgba(250, 250, 250, 0.22);
+      background: #0a0a0c;
+    }
+
+    .card-thumb.is-broken img {
+      display: none;
+    }
+
+    .card-thumb.is-broken .thumb-fallback {
+      display: flex;
+    }
+
+    .card-body {
+      padding: 1rem 1.1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+
+    .card-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .card-title a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .meta {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .award {
+      font-size: 0.75rem;
+      line-height: 1.45;
+      color: #e4e4e7;
+      border-left: 2px solid rgba(255, 255, 255, 0.45);
+      padding-left: 0.6rem;
+      margin-top: 0.2rem;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 0.5rem;
+    }
+
+    .card-footer a {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .card-footer a:hover {
+      opacity: 0.65;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.75rem 0 2.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.9375rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      article.card { transition: none; }
+      article.card:hover { transform: none; }
+      .btn { transition: none; }
+      .btn--solid:hover,
+      .btn--solid:focus-visible,
+      .btn--ghost:hover,
+      .btn--ghost:focus-visible {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body data-page="katalog">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-backdrop" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <main id="prace" data-active-tab="grafika">
+      <div class="catalog-header-panel">
+        <header class="catalog-header-panel__actions-row">
+          <nav class="catalog-top__bar" data-i18n-attr="aria-label:catalogNavAria" aria-label="Nawigacja witryny">
+            <div class="catalog-top__bar-start">
+              <a
+                href="./index.html"
+                id="catalog-landing-link"
+                class="btn btn--solid"
+                data-i18n-attr="aria-label:catalogHomeAria"
+                aria-label="Strona główna witryny"
+              >
+                <span data-i18n="catalogHome">Strona główna</span>
+              </a>
+              <div class="tabs tabs--segmented" role="tablist" data-i18n-attr="aria-label:tabsAria" aria-label="Widok portfolio">
+                <button type="button" class="tabs__btn is-active" role="tab" id="tab-grafika" aria-selected="true" aria-controls="panel-grafika" data-tab="grafika" data-i18n="tabGraphics">
+                  Grafika
+                </button>
+                <button type="button" class="tabs__btn" role="tab" id="tab-paintings" aria-selected="false" aria-controls="malarstwo" data-tab="paintings" tabindex="-1" data-i18n="tabPainting">
+                  Malarstwo
+                </button>
+              </div>
+            </div>
+            <a class="btn btn--ghost catalog-top__contact" id="catalog-kontakt-link" href="./kontakt.html" data-i18n="navContact">Kontakt</a>
+          </nav>
+        </header>
+      </div>
+
+      <div id="panel-grafika" class="tab-panel" role="tabpanel" aria-labelledby="tab-grafika">
+        <div class="grid" id="grid" role="list"></div>
+      </div>
+
+      <div id="malarstwo" class="tab-panel" role="tabpanel" aria-labelledby="tab-paintings" hidden>
+        <div class="gallery-grid" id="paintings-grid" role="list"></div>
+      </div>
+    </main>
+
+    <footer>
+      <span data-i18n="footerKatalog1">Miniatury grafiki i malarstwa pochodzą z pliku danych portfolio (podgląd w tej witrynie).</span><br />
+      <span data-i18n="footerKatalog2">Pełne rozdzielczości i opisy przy poszczególnych pozycjach na stronie źródłowej.</span>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="lang.js"></script>
+  <script>
+    /** Gdy portfolio (katalog.html) jest na subdomenie, ustaw pełny URL landingu. Puste = ./index.html */
+    const LANDING_PAGE_URL = "";
+
+    /** Strona kontaktu (np. subdomena). Puste = ./kontakt.html. */
+    const KONTAKT_PAGE_URL = "";
+
+    /** Gdy brak KONTAKT_PAGE_URL: opcjonalny mailto zamiast ./kontakt.html */
+    const CONTACT_EMAIL = "";
+
+    if (!window.PORTFOLIO_DATA) throw new Error("Brak data.js — załaduj plik PORTFOLIO_DATA.");
+    const { works, paintings, PAINTINGS_PAGE } = window.PORTFOLIO_DATA;
+
+    const grid = document.getElementById("grid");
+    const paintingsGrid = document.getElementById("paintings-grid");
+    const mainEl = document.getElementById("prace");
+    const tabGrafika = document.getElementById("tab-grafika");
+    const tabPaintings = document.getElementById("tab-paintings");
+    const panelGrafika = document.getElementById("panel-grafika");
+    const panelPaintings = document.getElementById("malarstwo");
+    const tabsInOrder = [tabGrafika, tabPaintings];
+    const landingLink = document.getElementById("catalog-landing-link");
+    if (landingLink && LANDING_PAGE_URL.trim()) landingLink.href = LANDING_PAGE_URL.trim();
+
+    const kontaktLink = document.getElementById("catalog-kontakt-link");
+    if (kontaktLink) {
+      if (KONTAKT_PAGE_URL.trim()) {
+        const u = KONTAKT_PAGE_URL.trim();
+        kontaktLink.href = u;
+        if (/^https?:\/\//i.test(u)) {
+          kontaktLink.target = "_blank";
+          kontaktLink.rel = "noopener noreferrer";
+        } else {
+          kontaktLink.removeAttribute("target");
+          kontaktLink.removeAttribute("rel");
+        }
+      } else if (CONTACT_EMAIL.trim()) {
+        kontaktLink.href = `mailto:${CONTACT_EMAIL.trim()}`;
+        kontaktLink.removeAttribute("target");
+        kontaktLink.removeAttribute("rel");
+      }
+    }
+
+    function initials(title) {
+      return title
+        .replace(/„|”|"|'/g, "")
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((w) => w[0])
+        .join("")
+        .toUpperCase();
+    }
+
+    function isHttpUrl(s) {
+      const t = (s || "").trim();
+      return /^https?:\/\//i.test(t);
+    }
+
+    function render() {
+      const filtered = works;
+      grid.innerHTML = "";
+
+      if (!filtered.length) {
+        const p = document.createElement("p");
+        p.className = "empty";
+        p.textContent = typeof window.portfolioT === "function" ? window.portfolioT("emptyGrid") : "Brak wyników.";
+        grid.appendChild(p);
+        return;
+      }
+
+      for (const w of filtered) {
+        const art = document.createElement("article");
+        art.className = "card";
+        art.setAttribute("role", "listitem");
+
+        const thumb = document.createElement("div");
+        thumb.className = "card-thumb";
+
+        const inner = document.createElement("div");
+        inner.className = "card-thumb-inner";
+
+        const img = document.createElement("img");
+        img.src = w.image;
+        img.alt = w.subtitle ? `${w.title} — ${w.subtitle}` : w.title;
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("error", () => {
+          thumb.classList.add("is-broken");
+        });
+
+        const fb = document.createElement("div");
+        fb.className = "thumb-fallback";
+        fb.setAttribute("aria-hidden", "true");
+        fb.textContent = initials(w.title);
+
+        inner.appendChild(img);
+        inner.appendChild(fb);
+        thumb.appendChild(inner);
+
+        const body = document.createElement("div");
+        body.className = "card-body";
+
+        const h3 = document.createElement("h3");
+        h3.className = "card-title";
+        if (isHttpUrl(w.href)) {
+          const aTitle = document.createElement("a");
+          aTitle.href = w.href.trim();
+          aTitle.target = "_blank";
+          aTitle.rel = "noopener noreferrer";
+          aTitle.textContent = w.title;
+          h3.appendChild(aTitle);
+        } else {
+          h3.textContent = w.title;
+        }
+
+        const meta = document.createElement("p");
+        meta.className = "meta";
+        meta.textContent = `${w.technique.toUpperCase()} · ${w.size}`;
+
+        body.appendChild(h3);
+        body.appendChild(meta);
+
+        if (w.award) {
+          const aw = document.createElement("p");
+          aw.className = "award";
+          aw.textContent = w.award;
+          body.appendChild(aw);
+        } else if (w.note) {
+          const n = document.createElement("p");
+          n.className = "award";
+          n.textContent = w.note;
+          body.appendChild(n);
+        }
+
+        if (isHttpUrl(w.href)) {
+          const foot = document.createElement("div");
+          foot.className = "card-footer";
+          const link = document.createElement("a");
+          link.href = w.href.trim();
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = typeof window.portfolioT === "function" ? window.portfolioT("cardFooterLink") : "Karta pracy";
+          foot.appendChild(link);
+          body.appendChild(foot);
+        }
+
+        art.appendChild(thumb);
+        art.appendChild(body);
+        grid.appendChild(art);
+      }
+    }
+
+    function renderPaintingsGrid() {
+      if (!paintingsGrid) return;
+      paintingsGrid.innerHTML = "";
+      const paintUrl = (PAINTINGS_PAGE || "").trim();
+      const paintingAsLink = isHttpUrl(paintUrl);
+      for (const p of paintings) {
+        const cell = document.createElement(paintingAsLink ? "a" : "div");
+        cell.className = "gallery-cell";
+        if (paintingAsLink) {
+          cell.href = paintUrl;
+          cell.target = "_blank";
+          cell.rel = "noopener noreferrer";
+        }
+        cell.setAttribute("role", "listitem");
+
+        const img = document.createElement("img");
+        img.className = "gallery-cell__img";
+        img.src = p.image;
+        img.alt = p.title;
+        img.loading = "lazy";
+        img.decoding = "async";
+
+        const cap = document.createElement("span");
+        cap.className = "gallery-cell__cap";
+        const titleLine = document.createElement("span");
+        titleLine.style.display = "block";
+        titleLine.textContent = p.title;
+        cap.appendChild(titleLine);
+        if (p.note) {
+          const note = document.createElement("span");
+          note.className = "gallery-cell__note";
+          note.textContent = p.note;
+          cap.appendChild(note);
+        }
+        const meta = document.createElement("span");
+        meta.className = "gallery-cell__meta";
+        var medium =
+          typeof window.portfolioT === "function" ? window.portfolioT("paintingMedium") : "Olej na płótnie";
+        meta.textContent = `${medium} · ${p.size}`;
+        cap.appendChild(meta);
+
+        cell.appendChild(img);
+        cell.appendChild(cap);
+        paintingsGrid.appendChild(cell);
+      }
+    }
+
+    function renderAll() {
+      render();
+    }
+
+    function setTab(which, opts) {
+      const syncHash = !opts || opts.syncHash !== false;
+      const w = which === "paintings" ? "paintings" : "grafika";
+      tabGrafika.classList.toggle("is-active", w === "grafika");
+      tabPaintings.classList.toggle("is-active", w === "paintings");
+      tabGrafika.setAttribute("aria-selected", String(w === "grafika"));
+      tabPaintings.setAttribute("aria-selected", String(w === "paintings"));
+      tabsInOrder.forEach((btn) => {
+        btn.tabIndex = btn.classList.contains("is-active") ? 0 : -1;
+      });
+      panelGrafika.hidden = w !== "grafika";
+      panelPaintings.hidden = w !== "paintings";
+      mainEl.dataset.activeTab = w;
+      if (!syncHash) return;
+      const hash = w === "paintings" ? "#malarstwo" : "#grafika";
+      try {
+        history.replaceState(null, "", hash);
+      } catch (_) {
+        /* file:// */
+      }
+    }
+
+    tabGrafika.addEventListener("click", () => setTab("grafika"));
+    tabPaintings.addEventListener("click", () => setTab("paintings"));
+
+    function applyHash() {
+      const h = (location.hash || "").toLowerCase();
+      if (h === "#malarstwo" || h === "#paintings") setTab("paintings", { syncHash: true });
+      else if (h === "#grafika") setTab("grafika", { syncHash: true });
+      else setTab("grafika", { syncHash: false });
+    }
+
+    tabsInOrder.forEach((tab, i) => {
+      tab.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          const next = tabsInOrder[(i + 1) % tabsInOrder.length];
+          next.focus();
+          next.click();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          const prev = tabsInOrder[(i - 1 + tabsInOrder.length) % tabsInOrder.length];
+          prev.focus();
+          prev.click();
+        }
+      });
+    });
+
+    window.addEventListener("hashchange", applyHash);
+
+    applyHash();
+    renderAll();
+    renderPaintingsGrid();
+
+    window.__portfolioOnLangChange = function () {
+      renderAll();
+      renderPaintingsGrid();
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Andrzej Ratajczyk — biografia, wystawy i osiągnięcia." />
+  <title>Andrzej Ratajczyk — Biografia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0f;
+      --bg-subtle: #16161c;
+      --fg: #fafafa;
+      --muted: #a1a1aa;
+      --line: #2e2e36;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--fg);
+      line-height: 1.6;
+      background: var(--bg);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 100% 6rem;
+      background-position: 0 4.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: clamp(16rem, 42vh, 30rem);
+      pointer-events: none;
+      z-index: 0;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(12, 12, 15, 0.55) 0%,
+          rgba(12, 12, 15, 0.82) 38%,
+          var(--bg) 100%
+        ),
+        url("https://linocut.andrzejratajczyk.pl/content/images/2023/03/icon-copy-2.jpg");
+      background-size: cover;
+      background-position: center 28%;
+      background-repeat: no-repeat;
+    }
+
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.055;
+      mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 44rem;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      min-width: 0;
+    }
+
+    .bio-top {
+      padding: clamp(1.25rem, 3vw, 1.75rem) 0 1rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+    }
+
+    .bio-top__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 0.75rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.15rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn--solid {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .btn--solid:hover,
+    .btn--solid:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .btn--ghost:hover,
+    .btn--ghost:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding-bottom: 3rem;
+    }
+
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 1rem;
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lead {
+      font-size: 1.02rem;
+      color: #e4e4e7;
+      margin: 0 0 1rem;
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    li {
+      margin-bottom: 0.45rem;
+    }
+
+    li strong {
+      color: #d4d4d8;
+      font-weight: 600;
+    }
+
+    a.inline {
+      color: #ffffff;
+      text-underline-offset: 3px;
+    }
+
+    .source {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    .bio-body[hidden] {
+      display: none;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.5rem 0 2.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+      .btn--solid:hover,
+      .btn--solid:focus-visible,
+      .btn--ghost:hover,
+      .btn--ghost:focus-visible {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body data-page="bio">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-backdrop" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header class="bio-top">
+      <nav class="bio-top__actions" data-i18n-attr="aria-label:bioNavAria" aria-label="Nawigacja">
+        <a class="btn btn--solid" id="bio-landing-link" href="./index.html" data-i18n="bioBack">Powrót do portfolio</a>
+        <a class="btn btn--ghost" id="bio-katalog-link" href="./katalog.html" data-i18n="bioCatalog">Portfolio</a>
+        <a class="btn btn--ghost" id="bio-kontakt-link" href="./kontakt.html" data-i18n="bioContact">Kontakt</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="bio-body" id="bio-content-pl" lang="pl">
+        <h1>Biografia</h1>
+        <p class="lead">
+          Andrzej Ratajczyk — urodzony w Warszawie w 1964 r. Absolwent Wydziału Grafiki Akademii Sztuk Pięknych w Warszawie.
+          Dyplom w pracowni druku artystycznego prof. Władysława Winieckiego (1990): cykl akwafort z gryzowanym
+          <cite>Licentia poetica</cite> oraz praca teoretyczna <cite>Emotional-visual baggage</cite>.
+        </p>
+        <p>
+          Przez wiele lat związany z reklamą; równolegle rozwijał grafikę i malarstwo. Prace znalazły się w kolekcjach
+          prywatnych i publicznych w Polsce, Europie, Stanach Zjednoczonych, Kanadzie, Arabii Saudyjskiej i na Tajwanie.
+          Od 2016 roku pracuje w pracowni w Łomiankach pod Warszawą, koncentrując się na linorycie punktowym i malarstwie.
+          Członek ZPAP (Związek Polskich Artystów Plastyków).
+        </p>
+
+        <h2>Wystawy indywidualne</h2>
+        <ul>
+          <li><strong>2024</strong> — „Fatum” — Galeria Impuls — Podkowa Leśna</li>
+          <li><strong>2023</strong> — „Absolut space” — Coffeedesk „Tamka” — Warszawa</li>
+          <li><strong>2022</strong> — „Przestworzenie” — Galeria Zwierz, Centrum Koneser — Warszawa</li>
+          <li><strong>2001</strong> — „Painting and Graphics” — Saatchi &amp; Saatchi — Warszawa</li>
+          <li><strong>1990</strong> — „Graphic” — KTH — Sztokholm</li>
+        </ul>
+
+        <h2>Wystawy zbiorowe (wybór)</h2>
+        <ul>
+          <li><strong>2025</strong> — GRAFITEKA 2025 — Warszawa</li>
+          <li><strong>2024</strong> — Salon Wielkopolski — Czarnków</li>
+          <li><strong>2024</strong> — SegnALI incisi — Bolonia, Włochy</li>
+          <li><strong>2024</strong> — Ślady graficzne — Bielsko-Biała</li>
+          <li><strong>2023</strong> — Salon Wielkopolski — Czarnków</li>
+          <li>
+            <strong>2023</strong> — wystawa pokonkursowa XV Międzynarodowego Konkursu Grafiki im. Józefa Gielniaka — Kamienna Góra
+            — <a class="inline" href="https://www.muzeumkarkonoskie.pl/konkurs_gielniaka/xv-edycja/" target="_blank" rel="noopener noreferrer">muzeumkarkonoskie.pl</a>
+          </li>
+          <li>
+            <strong>2023</strong> — XV Ogólnopolski Konkurs Grafiki im. Józefa Gielniaka — Jelenia Góra
+            — <a class="inline" href="https://www.muzeumkarkonoskie.pl/konkurs_gielniaka/xv-edycja/" target="_blank" rel="noopener noreferrer">muzeumkarkonoskie.pl</a>
+          </li>
+          <li>
+            <strong>2022</strong> — Międzynarodowe Biennale Grafiki R.O.C. — Tajpej
+            — <a class="inline" href="https://printbiennial.ntmofa.gov.tw/print20/en/news_detail.aspx?id=9abc96ba-5f10-40cf-b519-c8516ccf67d5" target="_blank" rel="noopener noreferrer">printbiennial.ntmofa.gov.tw</a>
+          </li>
+          <li>
+            <strong>2021</strong> — XI Polskie Triennale Grafiki — Katowice
+            — <a class="inline" href="https://tgp.asp.katowice.pl/" target="_blank" rel="noopener noreferrer">tgp.asp.katowice.pl</a>
+          </li>
+          <li>
+            <strong>2016</strong> — „Plural melts — Dunmore Caves at Yvonne Lambert” — Berlin
+            — <a class="inline" href="https://artviewer.org/plural-melts-dunmore-caves-at-yvonne-lambert/" target="_blank" rel="noopener noreferrer">artviewer.org</a>
+          </li>
+        </ul>
+
+        <h2>Osiągnięcia (wybór)</h2>
+        <ul>
+          <li><strong>2024</strong> — Salon Wielkopolski — finalista — Czarnków</li>
+          <li>
+            <strong>2024</strong> — publikacja grafik i artykułu w czasopiśmie branżowym
+            <cite>ACTUEL, L'ESTAMPE CONTEMPORAINE</cite> nr 29 — Belgia
+          </li>
+          <li><strong>2023</strong> — Salon Wielkopolski — finalista — Czarnków</li>
+          <li>
+            <strong>2023</strong> — XV Międzynarodowy Konkurs Grafiki im. Józefa Gielniaka — finalista — Jelenia Góra
+          </li>
+          <li><strong>2022</strong> — The Luxembourg Art Prize — certyfikat osiągnięć artystycznych</li>
+          <li>
+            <strong>2022</strong> — Międzynarodowe Biennale Grafiki R.O.C. — finalista — Tajpej
+          </li>
+          <li>
+            <strong>2021</strong> — XI Polskie Triennale Grafiki — finalista — Katowice
+          </li>
+        </ul>
+
+        <p class="source">
+          Wersja angielska: wybierz <strong>EN</strong> w prawym górnym rogu (przełącznik języka strony).
+        </p>
+      </div>
+
+      <div class="bio-body" id="bio-content-en" lang="en" hidden>
+        <h1>Biography</h1>
+        <p class="lead">
+          Andrzej Ratajczyk — born in Warsaw in 1964. Graduate of the Faculty of Graphic Arts at the Academy of Fine Arts in Warsaw.
+          He obtained his diploma in the printmaking studio led by Władysław Winiecki in 1990, presenting a series of etching and aquatint prints titled
+          <cite>Licentia poetica</cite> and a theoretical work entitled <cite>Emotional-visual baggage</cite>.
+        </p>
+        <p>
+          Having worked in advertising for many years, he developed printmaking and painting in parallel. Works from this period can be found in private and public collections in Poland, Europe, the USA, Canada, Saudi Arabia and Taiwan.
+          Since 2016 he has been working in his studio in Łomianki near Warsaw, focusing on spot linocut and painting. He is a member of ZPAP (Association of Polish Artists).
+        </p>
+
+        <h2>Individual exhibitions</h2>
+        <ul>
+          <li><strong>2024</strong> — "Fatum" — Galeria Impuls — Podkowa Leśna</li>
+          <li><strong>2023</strong> — "Absolut space" — Coffeedesk "Tamka" — Warsaw</li>
+          <li><strong>2022</strong> — "Przestworzenie" — Galeria Zwierz, Centrum Koneser — Warsaw</li>
+          <li><strong>2001</strong> — "Painting and Graphics" — Saatchi &amp; Saatchi — Warsaw</li>
+          <li><strong>1990</strong> — "Graphic" — KTH — Stockholm</li>
+        </ul>
+
+        <h2>Group exhibitions (selection)</h2>
+        <ul>
+          <li><strong>2025</strong> — GRAFITEKA 2025 — Warsaw</li>
+          <li><strong>2024</strong> — Salon Wielkopolski — Czarnków</li>
+          <li><strong>2024</strong> — SegnALI incisi — Bologna, Italy</li>
+          <li><strong>2024</strong> — Ślady graficzne — Bielsko-Biała</li>
+          <li><strong>2023</strong> — Salon Wielkopolski — Czarnków</li>
+          <li>
+            <strong>2023</strong> — post-competition exhibition, XV Józef Gielniak International Graphic Competition — Kamienna Góra
+            — <a class="inline" href="https://www.muzeumkarkonoskie.pl/konkurs_gielniaka/xv-edycja/" target="_blank" rel="noopener noreferrer">muzeumkarkonoskie.pl</a>
+          </li>
+          <li>
+            <strong>2023</strong> — XV Józef Gielniak National Graphic Competition — Jelenia Góra
+            — <a class="inline" href="https://www.muzeumkarkonoskie.pl/konkurs_gielniaka/xv-edycja/" target="_blank" rel="noopener noreferrer">muzeumkarkonoskie.pl</a>
+          </li>
+          <li>
+            <strong>2022</strong> — International Biennial Print Exhibit R.O.C. — Taipei
+            — <a class="inline" href="https://printbiennial.ntmofa.gov.tw/print20/en/news_detail.aspx?id=9abc96ba-5f10-40cf-b519-c8516ccf67d5" target="_blank" rel="noopener noreferrer">printbiennial.ntmofa.gov.tw</a>
+          </li>
+          <li>
+            <strong>2021</strong> — 11th Polish Graphics Triennial — Katowice
+            — <a class="inline" href="https://tgp.asp.katowice.pl/" target="_blank" rel="noopener noreferrer">tgp.asp.katowice.pl</a>
+          </li>
+          <li>
+            <strong>2016</strong> — "Plural melts — Dunmore Caves at Yvonne Lambert" — Berlin
+            — <a class="inline" href="https://artviewer.org/plural-melts-dunmore-caves-at-yvonne-lambert/" target="_blank" rel="noopener noreferrer">artviewer.org</a>
+          </li>
+        </ul>
+
+        <h2>Achievements (selection)</h2>
+        <ul>
+          <li><strong>2024</strong> — Salon Wielkopolski — finalist — Czarnków</li>
+          <li>
+            <strong>2024</strong> — publication of prints and an article in the trade journal <cite>ACTUEL, L'ESTAMPE CONTEMPORAINE</cite> no. 29 — Belgium
+          </li>
+          <li><strong>2023</strong> — Salon Wielkopolski — finalist — Czarnków</li>
+          <li>
+            <strong>2023</strong> — XV Józef Gielniak International Graphic Competition — finalist — Jelenia Góra
+          </li>
+          <li><strong>2022</strong> — The Luxembourg Art Prize — certificate of artistic achievement</li>
+          <li>
+            <strong>2022</strong> — International Biennial Print Exhibit R.O.C. — finalist — Taipei
+          </li>
+          <li>
+            <strong>2021</strong> — 11th Polish Graphics Triennial — finalist — Katowice
+          </li>
+        </ul>
+
+        <p class="source">
+          Polish version: choose <strong>PL</strong> in the top-right corner (site language switch).
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <span data-i18n="footerBio">Andrzej Ratajczyk — biografia.</span>
+    </footer>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    /** Na subdomenie bio: pełny URL landingu, np. https://portfolio.autor.pl/index.html */
+    const LANDING_PAGE_URL = "";
+    /** Opcjonalnie pełny URL portfolio na innej domenie; puste = ./katalog.html */
+    const KATALOG_PAGE_URL = "";
+    /** Strona kontaktu (np. subdomena). Puste = ./kontakt.html */
+    const KONTAKT_PAGE_URL = "";
+    /** Gdy brak KONTAKT_PAGE_URL: opcjonalny mailto zamiast ./kontakt.html */
+    const CONTACT_EMAIL = "";
+
+    (function () {
+      const land = document.getElementById("bio-landing-link");
+      if (land && LANDING_PAGE_URL.trim()) land.href = LANDING_PAGE_URL.trim();
+      const kat = document.getElementById("bio-katalog-link");
+      if (kat && KATALOG_PAGE_URL.trim()) kat.href = KATALOG_PAGE_URL.trim();
+      const kon = document.getElementById("bio-kontakt-link");
+      if (kon) {
+        if (KONTAKT_PAGE_URL.trim()) {
+          const u = KONTAKT_PAGE_URL.trim();
+          kon.href = u;
+          if (/^https?:\/\//i.test(u)) {
+            kon.target = "_blank";
+            kon.rel = "noopener noreferrer";
+          } else {
+            kon.removeAttribute("target");
+            kon.removeAttribute("rel");
+          }
+        } else if (CONTACT_EMAIL.trim()) {
+          kon.href = `mailto:${CONTACT_EMAIL.trim()}`;
+          kon.removeAttribute("target");
+          kon.removeAttribute("rel");
+        }
+      }
+
+    })();
+  </script>
+</body>
+</html>

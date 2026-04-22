@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Andrzej Ratajczyk — kontakt i social media." />
+  <title>Andrzej Ratajczyk — Kontakt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0f;
+      --fg: #fafafa;
+      --muted: #a1a1aa;
+      --line: #2e2e36;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      font-size: 0.9375rem;
+      color: var(--fg);
+      line-height: 1.6;
+      background: var(--bg);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 100% 6rem;
+      background-position: 0 4.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: clamp(16rem, 42vh, 30rem);
+      pointer-events: none;
+      z-index: 0;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(12, 12, 15, 0.55) 0%,
+          rgba(12, 12, 15, 0.82) 38%,
+          var(--bg) 100%
+        ),
+        url("https://linocut.andrzejratajczyk.pl/content/images/2023/03/icon-copy-2.jpg");
+      background-size: cover;
+      background-position: center 28%;
+      background-repeat: no-repeat;
+    }
+
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.055;
+      mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 44rem;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      min-width: 0;
+    }
+
+    .page-top {
+      padding: clamp(1.25rem, 3vw, 1.75rem) 0 1rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+    }
+
+    .page-top__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 0.75rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.15rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn--solid {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .btn--solid:hover,
+    .btn--solid:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .btn--ghost:hover,
+    .btn--ghost:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding-bottom: 3rem;
+    }
+
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 1rem;
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    .card {
+      margin: 1.25rem 0;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(18, 18, 24, 0.55);
+    }
+
+    .card h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.65rem;
+    }
+
+    .email-line {
+      font-size: 1rem;
+      color: #e4e4e7;
+      word-break: break-all;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+      .btn--solid:hover,
+      .btn--solid:focus-visible,
+      .btn--ghost:hover,
+      .btn--ghost:focus-visible {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body data-page="kontakt">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-backdrop" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header class="page-top">
+      <nav class="page-top__actions" data-i18n-attr="aria-label:kontaktNavAria" aria-label="Nawigacja">
+        <a class="btn btn--solid" id="kontakt-landing-link" href="./index.html" data-i18n="kontaktBack">Powrót do portfolio</a>
+        <a class="btn btn--ghost" id="kontakt-katalog-link" href="./katalog.html" data-i18n="kontaktCatalog">Portfolio</a>
+        <a class="btn btn--ghost" id="kontakt-bio-link" href="./bio.html" data-i18n="kontaktBio">Bio</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1 data-i18n="kontaktH1">Kontakt</h1>
+      <p data-i18n="kontaktLead">
+        Zapytania o prace, wystawy i reprodukcje można kierować przez e-mail (poniżej) oraz profile społecznościowe.
+      </p>
+
+      <div id="email-card" class="card" hidden>
+        <h2 data-i18n="kontaktEmailH2">E-mail</h2>
+        <p class="email-line" id="email-display"></p>
+        <div class="links">
+          <a class="btn btn--solid" id="mailto-btn" href="#" data-i18n="kontaktWrite">Napisz wiadomość</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="kontaktSocialH2">Social media</h2>
+        <div class="links">
+          <a class="btn btn--ghost" href="https://www.instagram.com/andyrx/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="btn btn--ghost" href="https://www.facebook.com/profile.php?id=100090307976991" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    /** Na subdomenie kontakt: pełne URL-e stron głównych (opcjonalnie). */
+    const LANDING_PAGE_URL = "";
+    const KATALOG_PAGE_URL = "";
+    const BIO_PAGE_URL = "";
+
+    /** Wpisz adres, np. "kontakt@domena.pl" — pojawi się karta z mailem. */
+    const CONTACT_EMAIL = "andrzej_ratajczyk@o2.pl";
+
+    (function () {
+      const land = document.getElementById("kontakt-landing-link");
+      if (land && LANDING_PAGE_URL.trim()) land.href = LANDING_PAGE_URL.trim();
+      const kat = document.getElementById("kontakt-katalog-link");
+      if (kat && KATALOG_PAGE_URL.trim()) kat.href = KATALOG_PAGE_URL.trim();
+      const bio = document.getElementById("kontakt-bio-link");
+      if (bio && BIO_PAGE_URL.trim()) bio.href = BIO_PAGE_URL.trim();
+
+      const em = (CONTACT_EMAIL || "").trim();
+      if (em) {
+        const card = document.getElementById("email-card");
+        const disp = document.getElementById("email-display");
+        const btn = document.getElementById("mailto-btn");
+        if (card && disp && btn) {
+          disp.textContent = em;
+          btn.href = `mailto:${em}`;
+          card.hidden = false;
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

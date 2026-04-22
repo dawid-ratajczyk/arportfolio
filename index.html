@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Andrzej Ratajczyk — linoryt i malarstwo. Wejście do portfolio." />
+  <title>Andrzej Ratajczyk — Linoryt &amp; malarstwo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0f;
+      --bg-subtle: #16161c;
+      --fg: #fafafa;
+      --muted: #a1a1aa;
+      --line: #2e2e36;
+      --surface: rgba(18, 18, 24, 0.65);
+      --surface-edge: rgba(255, 255, 255, 0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--fg);
+      line-height: 1.55;
+      background: var(--bg);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 100% 6rem;
+      background-position: 0 4.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: clamp(18rem, 48vh, 34rem);
+      pointer-events: none;
+      z-index: 0;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(12, 12, 15, 0.55) 0%,
+          rgba(12, 12, 15, 0.82) 38%,
+          var(--bg) 100%
+        ),
+        url("https://linocut.andrzejratajczyk.pl/content/images/2023/03/icon-copy-2.jpg");
+      background-size: cover;
+      background-position: center 28%;
+      background-repeat: no-repeat;
+    }
+
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.055;
+      mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 76rem;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      min-width: 0;
+    }
+
+    .landing {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
+      width: 100%;
+      padding: clamp(3rem, 10vw, 5rem) 0 clamp(2.5rem, 6vw, 4rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .landing__intro {
+      width: 100%;
+      max-width: 38rem;
+      min-width: 0;
+      margin: 0 auto;
+      padding: 0 0 clamp(1.75rem, 4vw, 2.75rem);
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .landing__name {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+      margin: 0 0 clamp(0.85rem, 2vw, 1.15rem);
+      text-wrap: balance;
+      color: var(--fg);
+    }
+
+    .landing__bio {
+      font-size: clamp(0.95rem, 1.9vw, 1.0625rem);
+      color: var(--muted);
+      max-width: 36rem;
+      margin: 0 auto clamp(1.15rem, 2.8vw, 1.5rem);
+      line-height: 1.68;
+      text-wrap: balance;
+    }
+
+    .landing__bio strong {
+      color: #e4e4e7;
+      font-weight: 600;
+    }
+
+    .landing__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 0.75rem;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .landing__nav .btn {
+      max-width: 100%;
+    }
+
+    .landing__preview {
+      width: 100%;
+      max-width: 58rem;
+      min-width: 0;
+      margin: 0 auto;
+      padding: clamp(1.25rem, 3vw, 1.85rem);
+      overflow: hidden;
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--surface-edge);
+      border-radius: 10px;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,
+        0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    @supports not (backdrop-filter: blur(12px)) {
+      .landing__preview {
+        background: rgba(18, 18, 24, 0.92);
+      }
+    }
+
+    .landing__dual {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: clamp(1.35rem, 3vw, 2rem);
+      margin: 0;
+      min-width: 0;
+      width: 100%;
+      justify-items: stretch;
+    }
+
+    @media (min-width: 40rem) {
+      .landing__dual {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(1.5rem, 3.5vw, 2.5rem);
+      }
+    }
+
+    .landing__spot {
+      display: flex;
+      justify-content: flex-start;
+      align-items: stretch;
+      width: 100%;
+      min-width: 0;
+      min-height: 0;
+      max-width: 100%;
+    }
+
+    @media (min-width: 40rem) {
+      .landing__spot {
+        justify-self: stretch;
+      }
+    }
+
+    .landing__col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      gap: 0.65rem;
+    }
+
+    .landing__figure {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      min-height: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      background: radial-gradient(ellipse 120% 80% at 50% 40%, #15151a 0%, #0a0a0c 72%);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+    }
+
+    .landing__figure img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: min(48vh, 22rem, 55vw);
+      object-fit: contain;
+    }
+
+    .landing__cta {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      margin: 0;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      box-sizing: border-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.15rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn--solid {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .btn--solid:hover,
+    .btn--solid:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .btn--ghost:hover,
+    .btn--ghost:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+      .btn--solid:hover,
+      .btn--solid:focus-visible,
+      .btn--ghost:hover,
+      .btn--ghost:focus-visible {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body data-page="index">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-backdrop" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header class="landing">
+      <div class="landing__intro">
+        <h1 class="landing__name">Andrzej Ratajczyk</h1>
+        <p class="landing__bio" data-lang-block="pl">
+          Artysta grafik i malarz. W <strong>linorycie</strong> buduje przestrzenie na pograniczu geometrii i surrealizmu;
+          w <strong>oleju na płótnie</strong> rozwija te same motywy w większej skali. Prace były prezentowane m.in. na
+          konkursach i triennale grafiki w Polsce i za granicą.
+        </p>
+        <p class="landing__bio" data-lang-block="en" hidden>
+          Graphic artist and painter. In <strong>linocut</strong> he builds spaces between geometry and surrealism;
+          in <strong>oil on canvas</strong> he develops the same motifs on a larger scale. Works have been shown at graphic
+          competitions and triennials in Poland and abroad.
+        </p>
+        <nav class="landing__nav" data-i18n-attr="aria-label:landingNavAria" aria-label="Bio i social media">
+          <a class="btn btn--solid" id="landing-link-bio" href="./bio.html" data-i18n="navBio">Bio</a>
+          <a class="btn btn--ghost" id="landing-link-kontakt" href="./kontakt.html" data-i18n="navContact">Kontakt</a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/andyrx/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="btn btn--ghost" href="https://www.facebook.com/profile.php?id=100090307976991" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </nav>
+      </div>
+      <div class="landing__preview">
+        <div class="landing__dual">
+          <div class="landing__spot">
+            <div class="landing__col">
+              <a href="katalog.html#grafika" id="landing-cta-grafika" class="btn btn--solid landing__cta" data-i18n="ctaGraphics">Grafika</a>
+              <figure class="landing__figure">
+                <img id="landing-img-grafika" alt="" decoding="async" />
+              </figure>
+            </div>
+          </div>
+          <div class="landing__spot">
+            <div class="landing__col">
+              <a href="katalog.html#malarstwo" id="landing-cta-malarstwo" class="btn btn--ghost landing__cta" data-i18n="ctaPainting">Malarstwo</a>
+              <figure class="landing__figure">
+                <img id="landing-img-malarstwo" alt="" decoding="async" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="lang.js"></script>
+  <script>
+    /**
+     * Pełny adres strony portfolio (plik katalog.html) na subdomenie (bez hasha), np.
+     * "https://portfolio.example.com/katalog.html"
+     * lub root subdomeny: "https://portfolio.example.com/"
+     * Puste = ta sama strona co landing: katalog.html obok index.html.
+     */
+    const CATALOG_PAGE_URL = "";
+
+    /** Gdy KONTAKT_PAGE_URL puste: opcjonalny mailto zamiast ./kontakt.html */
+    const CONTACT_EMAIL = "";
+
+    /**
+     * Pełny adres strony biografii (np. subdomena). Puste = ./bio.html obok index.html.
+     * Przykład: "https://bio.example.com/" lub "https://bio.example.com/bio.html"
+     */
+    const BIO_PAGE_URL = "";
+
+    /**
+     * Pełny adres strony kontaktu (np. subdomena). Puste = ./kontakt.html.
+     * Gdy puste i ustawiony CONTACT_EMAIL — przycisk „Kontakt” otwiera mailto zamiast pliku.
+     */
+    const KONTAKT_PAGE_URL = "";
+
+    function catalogBaseUrl() {
+      const raw = (CATALOG_PAGE_URL || "").trim();
+      if (!raw) return new URL("katalog.html", window.location.href).href.split("#")[0];
+      return raw.split("#")[0];
+    }
+
+    function catalogHref(hash) {
+      const h = hash.startsWith("#") ? hash : `#${hash}`;
+      return catalogBaseUrl() + h;
+    }
+
+    function initLanding() {
+      if (!window.PORTFOLIO_DATA) return;
+      const { works, paintings } = window.PORTFOLIO_DATA;
+
+      function pickRandom(arr) {
+        if (!arr || !arr.length) return null;
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      /** Z pola `size` (np. "65×50 cm", "90×70 cm · 2026") — pierwsza para liczb jako szer. × wys. w cm. */
+      function parseSizeCm(sizeStr) {
+        if (!sizeStr || typeof sizeStr !== "string") return null;
+        const m = sizeStr.match(/(\d+(?:[.,]\d+)?)\s*[×x]\s*(\d+(?:[.,]\d+)?)/i);
+        if (!m) return null;
+        const w = parseFloat(m[1].replace(",", "."));
+        const h = parseFloat(m[2].replace(",", "."));
+        if (!(w > 0) || !(h > 0)) return null;
+        return { w, h, ratio: w / h, area: w * h };
+      }
+
+      function dimScore(a, b) {
+        const ar = Math.abs(Math.log(a.ratio) - Math.log(b.ratio));
+        const sz = Math.abs(Math.log(a.area) - Math.log(b.area));
+        return ar + 0.42 * sz;
+      }
+
+      /** Losowy linoryt, obraz dobrane podobnie pod format (proporcje + skala pola). */
+      function pickLandingPair(workList, paintList) {
+        const withW = workList
+          .map((o) => ({ o, dim: parseSizeCm(o.size) }))
+          .filter((x) => x.dim);
+        const withP = paintList
+          .map((o) => ({ o, dim: parseSizeCm(o.size) }))
+          .filter((x) => x.dim);
+        if (!withW.length || !withP.length) {
+          return { work: pickRandom(workList), painting: pickRandom(paintList) };
+        }
+        const wPick = withW[Math.floor(Math.random() * withW.length)];
+        const gw = wPick.dim;
+        const scored = withP
+          .map((c) => ({ c, score: dimScore(gw, c.dim) }))
+          .sort((a, b) => a.score - b.score);
+        const topN = Math.min(3, scored.length);
+        const chosen = scored[Math.floor(Math.random() * topN)];
+        return { work: wPick.o, painting: chosen.c.o };
+      }
+
+      const imgG = document.getElementById("landing-img-grafika");
+      const imgP = document.getElementById("landing-img-malarstwo");
+      const ctaG = document.getElementById("landing-cta-grafika");
+      const ctaP = document.getElementById("landing-cta-malarstwo");
+      if (!imgG || !imgP || !ctaG || !ctaP || !works || !paintings) return;
+
+      ctaG.href = catalogHref("#grafika");
+      ctaP.href = catalogHref("#malarstwo");
+
+      const bioLink = document.getElementById("landing-link-bio");
+      if (bioLink) {
+        if (BIO_PAGE_URL.trim()) {
+          const u = BIO_PAGE_URL.trim();
+          bioLink.href = u;
+          if (/^https?:\/\//i.test(u)) {
+            bioLink.target = "_blank";
+            bioLink.rel = "noopener noreferrer";
+          } else {
+            bioLink.removeAttribute("target");
+            bioLink.removeAttribute("rel");
+          }
+        }
+      }
+
+      const { work: w, painting: p } = pickLandingPair(works, paintings);
+      function altGraphic() {
+        return (typeof window.portfolioT === "function" && window.portfolioT("altGraphic")) || "Linoryt";
+      }
+      function altPainting() {
+        return (typeof window.portfolioT === "function" && window.portfolioT("altPainting")) || "Malarstwo";
+      }
+
+      function applyLandingAlts() {
+        if (w) imgG.alt = w.title || altGraphic();
+        if (p) imgP.alt = p.title || altPainting();
+      }
+
+      if (w) imgG.src = w.image;
+      if (p) imgP.src = p.image;
+      applyLandingAlts();
+      window.addEventListener("portfoliolangchange", applyLandingAlts);
+
+      const kontakt = document.getElementById("landing-link-kontakt");
+      if (kontakt) {
+        if (KONTAKT_PAGE_URL.trim()) {
+          const u = KONTAKT_PAGE_URL.trim();
+          kontakt.href = u;
+          if (/^https?:\/\//i.test(u)) {
+            kontakt.target = "_blank";
+            kontakt.rel = "noopener noreferrer";
+          } else {
+            kontakt.removeAttribute("target");
+            kontakt.removeAttribute("rel");
+          }
+        } else if (CONTACT_EMAIL.trim()) {
+          kontakt.href = `mailto:${CONTACT_EMAIL.trim()}`;
+          kontakt.removeAttribute("target");
+          kontakt.removeAttribute("rel");
+        }
+      }
+    }
+
+    initLanding();
+  </script>
+</body>
+</html>
