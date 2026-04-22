@@ -230,6 +230,7 @@
       border: 1px solid var(--line);
       border-radius: 2px;
       overflow: hidden;
+      cursor: pointer;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
@@ -438,10 +439,182 @@
       font-size: 0.9375rem;
     }
 
+    article.card {
+      cursor: pointer;
+    }
+
+    article.card a {
+      cursor: pointer;
+    }
+
+    .work-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(0.65rem, 2.5vw, 1.25rem);
+      box-sizing: border-box;
+    }
+
+    .work-lightbox[hidden] {
+      display: none !important;
+    }
+
+    .work-lightbox__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 6, 8, 0.94);
+      cursor: pointer;
+    }
+
+    .work-lightbox__close {
+      position: absolute;
+      top: clamp(0.65rem, 2.5vw, 1rem);
+      right: clamp(5.25rem, 22vw, 7rem);
+      z-index: 3;
+      width: 2.75rem;
+      height: 2.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      border: none;
+      border-radius: 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--fg);
+      background: rgba(22, 22, 30, 0.92);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    }
+
+    .work-lightbox__close:hover,
+    .work-lightbox__close:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      outline: none;
+    }
+
+    .work-lightbox__panel {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.75rem, 2vw, 1.1rem);
+      max-width: min(100%, 96vw);
+      max-height: 100%;
+      pointer-events: none;
+    }
+
+    .work-lightbox__img {
+      display: block;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      max-height: min(78vh, calc(100vh - 11rem));
+      object-fit: contain;
+      background: #0a0a0c;
+      border-radius: 4px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+      pointer-events: auto;
+    }
+
+    .work-lightbox__meta {
+      max-width: 40rem;
+      width: 100%;
+      text-align: center;
+      pointer-events: auto;
+    }
+
+    .work-lightbox__title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1rem, 2.8vw, 1.35rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 0.35rem;
+      color: var(--fg);
+    }
+
+    .work-lightbox__subtitle {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin: 0 0 0.5rem;
+      line-height: 1.45;
+    }
+
+    .work-lightbox__detail {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.35rem;
+      line-height: 1.45;
+    }
+
+    .work-lightbox__award {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: #e4e4e7;
+      text-align: left;
+      margin: 0.35rem 0 0;
+      padding-left: 0.65rem;
+      border-left: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .work-lightbox__outlink {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .work-lightbox__outlink:hover {
+      opacity: 0.7;
+    }
+
+    body.work-lightbox-open {
+      overflow: hidden;
+    }
+
+    .gallery-cell__outwrap {
+      margin: 0.5rem 0 0;
+      padding: 0 0.85rem 0.75rem;
+    }
+
+    .gallery-cell__out {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .gallery-cell__out:hover {
+      opacity: 0.65;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       article.card { transition: none; }
       article.card:hover { transform: none; }
+      .work-lightbox__close { transition: none; }
       .btn { transition: none; }
       .btn--solid:hover,
       .btn--solid:focus-visible,
@@ -471,6 +644,7 @@
               >
                 <span data-i18n="catalogHome">Strona główna</span>
               </a>
+              <a class="btn btn--ghost" id="catalog-kontakt-link" href="./kontakt.html" data-i18n="navContact">Kontakt</a>
               <div class="tabs tabs--segmented" role="tablist" data-i18n-attr="aria-label:tabsAria" aria-label="Widok portfolio">
                 <button type="button" class="tabs__btn is-active" role="tab" id="tab-grafika" aria-selected="true" aria-controls="panel-grafika" data-tab="grafika" data-i18n="tabGraphics">
                   Grafika
@@ -480,7 +654,6 @@
                 </button>
               </div>
             </div>
-            <a class="btn btn--ghost catalog-top__contact" id="catalog-kontakt-link" href="./kontakt.html" data-i18n="navContact">Kontakt</a>
           </nav>
         </header>
       </div>
@@ -498,6 +671,31 @@
       <span data-i18n="footerKatalog1">Miniatury grafiki i malarstwa pochodzą z pliku danych portfolio (podgląd w tej witrynie).</span><br />
       <span data-i18n="footerKatalog2">Pełne rozdzielczości i opisy przy poszczególnych pozycjach na stronie źródłowej.</span>
     </footer>
+  </div>
+
+  <div
+    id="work-lightbox"
+    class="work-lightbox"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    data-i18n-attr="aria-label:lightboxAria"
+    aria-label="Powiększenie pracy"
+  >
+    <div class="work-lightbox__backdrop" aria-hidden="true"></div>
+    <button
+      type="button"
+      id="work-lightbox-close"
+      class="work-lightbox__close"
+      data-i18n-attr="aria-label:lightboxClose"
+      aria-label="Zamknij"
+    >
+      <span class="work-lightbox__close-icon" aria-hidden="true">×</span>
+    </button>
+    <div class="work-lightbox__panel">
+      <img id="work-lightbox-img" class="work-lightbox__img" alt="" />
+      <div id="work-lightbox-meta" class="work-lightbox__meta"></div>
+    </div>
   </div>
 
   <script src="data.js"></script>
@@ -543,6 +741,137 @@
         kontaktLink.removeAttribute("target");
         kontaktLink.removeAttribute("rel");
       }
+    }
+
+    const workLightbox = document.getElementById("work-lightbox");
+    const workLightboxBackdrop = workLightbox && workLightbox.querySelector(".work-lightbox__backdrop");
+    const workLightboxClose = document.getElementById("work-lightbox-close");
+    const workLightboxImg = document.getElementById("work-lightbox-img");
+    const workLightboxMeta = document.getElementById("work-lightbox-meta");
+    let lightboxResumeFocus = null;
+
+    function T(key, fallback) {
+      return typeof window.portfolioT === "function" ? window.portfolioT(key) : fallback;
+    }
+
+    function clearLightboxMeta() {
+      if (!workLightboxMeta) return;
+      while (workLightboxMeta.firstChild) workLightboxMeta.removeChild(workLightboxMeta.firstChild);
+    }
+
+    function onWorkLightboxKeydown(e) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeWorkLightbox();
+      }
+    }
+
+    function closeWorkLightbox() {
+      if (!workLightbox || workLightbox.hidden) return;
+      workLightbox.hidden = true;
+      document.body.classList.remove("work-lightbox-open");
+      document.removeEventListener("keydown", onWorkLightboxKeydown);
+      if (workLightboxImg) {
+        workLightboxImg.removeAttribute("src");
+        workLightboxImg.alt = "";
+      }
+      clearLightboxMeta();
+      if (lightboxResumeFocus && typeof lightboxResumeFocus.focus === "function") {
+        try {
+          lightboxResumeFocus.focus();
+        } catch (_) {}
+      }
+      lightboxResumeFocus = null;
+    }
+
+    function openWorkLightbox(w) {
+      if (!workLightbox || !workLightboxImg || !workLightboxMeta) return;
+      lightboxResumeFocus = document.activeElement;
+      workLightboxImg.src = w.image;
+      workLightboxImg.alt = w.subtitle ? `${w.title} — ${w.subtitle}` : w.title;
+      clearLightboxMeta();
+      const h2 = document.createElement("h2");
+      h2.className = "work-lightbox__title";
+      h2.textContent = w.title;
+      workLightboxMeta.appendChild(h2);
+      if (w.subtitle) {
+        const sub = document.createElement("p");
+        sub.className = "work-lightbox__subtitle";
+        sub.textContent = w.subtitle;
+        workLightboxMeta.appendChild(sub);
+      }
+      const det = document.createElement("p");
+      det.className = "work-lightbox__detail";
+      det.textContent = `${w.technique.toUpperCase()} · ${w.size}`;
+      workLightboxMeta.appendChild(det);
+      if (w.award || w.note) {
+        const ex = document.createElement("p");
+        ex.className = "work-lightbox__award";
+        ex.textContent = w.award || w.note;
+        workLightboxMeta.appendChild(ex);
+      }
+      if (isHttpUrl(w.href)) {
+        const a = document.createElement("a");
+        a.className = "work-lightbox__outlink";
+        a.href = w.href.trim();
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = T("cardFooterLink", "Karta pracy");
+        workLightboxMeta.appendChild(a);
+      }
+      workLightbox.hidden = false;
+      document.body.classList.add("work-lightbox-open");
+      try {
+        if (workLightboxClose) workLightboxClose.focus();
+      } catch (_) {}
+      document.addEventListener("keydown", onWorkLightboxKeydown);
+    }
+
+    function openPaintingLightbox(p, paintUrl) {
+      if (!workLightbox || !workLightboxImg || !workLightboxMeta) return;
+      lightboxResumeFocus = document.activeElement;
+      workLightboxImg.src = p.image;
+      workLightboxImg.alt = p.title;
+      clearLightboxMeta();
+      const h2 = document.createElement("h2");
+      h2.className = "work-lightbox__title";
+      h2.textContent = p.title;
+      workLightboxMeta.appendChild(h2);
+      const medium = T("paintingMedium", "Olej na płótnie");
+      const det = document.createElement("p");
+      det.className = "work-lightbox__detail";
+      det.textContent = `${medium} · ${p.size}`;
+      workLightboxMeta.appendChild(det);
+      if (p.note) {
+        const ex = document.createElement("p");
+        ex.className = "work-lightbox__award";
+        ex.textContent = p.note;
+        workLightboxMeta.appendChild(ex);
+      }
+      const pu = (paintUrl || "").trim();
+      if (isHttpUrl(pu)) {
+        const a = document.createElement("a");
+        a.className = "work-lightbox__outlink";
+        a.href = pu;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = T("paintingOutLink", "Strona malarstwa");
+        workLightboxMeta.appendChild(a);
+      }
+      workLightbox.hidden = false;
+      document.body.classList.add("work-lightbox-open");
+      try {
+        if (workLightboxClose) workLightboxClose.focus();
+      } catch (_) {}
+      document.addEventListener("keydown", onWorkLightboxKeydown);
+    }
+
+    if (workLightboxBackdrop) workLightboxBackdrop.addEventListener("click", closeWorkLightbox);
+    if (workLightboxClose) {
+      workLightboxClose.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeWorkLightbox();
+      });
     }
 
     function initials(title) {
@@ -651,6 +980,10 @@
 
         art.appendChild(thumb);
         art.appendChild(body);
+        art.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
+          openWorkLightbox(w);
+        });
         grid.appendChild(art);
       }
     }
@@ -659,15 +992,10 @@
       if (!paintingsGrid) return;
       paintingsGrid.innerHTML = "";
       const paintUrl = (PAINTINGS_PAGE || "").trim();
-      const paintingAsLink = isHttpUrl(paintUrl);
+      const paintingPageUrl = isHttpUrl(paintUrl) ? paintUrl : "";
       for (const p of paintings) {
-        const cell = document.createElement(paintingAsLink ? "a" : "div");
+        const cell = document.createElement("div");
         cell.className = "gallery-cell";
-        if (paintingAsLink) {
-          cell.href = paintUrl;
-          cell.target = "_blank";
-          cell.rel = "noopener noreferrer";
-        }
         cell.setAttribute("role", "listitem");
 
         const img = document.createElement("img");
@@ -691,13 +1019,31 @@
         }
         const meta = document.createElement("span");
         meta.className = "gallery-cell__meta";
-        var medium =
-          typeof window.portfolioT === "function" ? window.portfolioT("paintingMedium") : "Olej na płótnie";
+        const medium = T("paintingMedium", "Olej na płótnie");
         meta.textContent = `${medium} · ${p.size}`;
         cap.appendChild(meta);
 
         cell.appendChild(img);
         cell.appendChild(cap);
+
+        if (paintingPageUrl) {
+          const outWrap = document.createElement("p");
+          outWrap.className = "gallery-cell__outwrap";
+          const out = document.createElement("a");
+          out.className = "gallery-cell__out";
+          out.href = paintingPageUrl;
+          out.target = "_blank";
+          out.rel = "noopener noreferrer";
+          out.textContent = T("paintingOutLink", "Strona malarstwa");
+          outWrap.appendChild(out);
+          cell.appendChild(outWrap);
+        }
+
+        cell.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
+          openPaintingLightbox(p, paintingPageUrl);
+        });
+
         paintingsGrid.appendChild(cell);
       }
     }
@@ -719,6 +1065,7 @@
       panelGrafika.hidden = w !== "grafika";
       panelPaintings.hidden = w !== "paintings";
       mainEl.dataset.activeTab = w;
+      closeWorkLightbox();
       if (!syncHash) return;
       const hash = w === "paintings" ? "#malarstwo" : "#grafika";
       try {
