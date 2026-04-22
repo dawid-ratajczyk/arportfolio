@@ -223,7 +223,8 @@
     }
 
     .gallery-cell {
-      display: block;
+      display: flex;
+      flex-direction: column;
       text-decoration: none;
       color: inherit;
       background: var(--card);
@@ -246,38 +247,11 @@
       aspect-ratio: 1;
       object-fit: contain;
       background: #0a0a0c;
+      border-bottom: 1px solid var(--line);
     }
 
-    .gallery-cell__cap {
-      padding: 0.65rem 0.85rem 0.75rem;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      color: var(--fg);
-      border-top: 1px solid var(--line);
-    }
-
-    .gallery-cell__meta {
-      display: block;
-      margin-top: 0.25rem;
-      font-family: "Inter", sans-serif;
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .gallery-cell__note {
-      display: block;
-      margin-top: 0.35rem;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #fca5a5;
+    .gallery-cell .card-body {
+      flex: 1;
     }
 
     .grid {
@@ -589,25 +563,6 @@
 
     body.work-lightbox-open {
       overflow: hidden;
-    }
-
-    .gallery-cell__outwrap {
-      margin: 0.5rem 0 0;
-      padding: 0 0.85rem 0.75rem;
-    }
-
-    .gallery-cell__out {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--fg);
-      text-decoration: none;
-    }
-
-    .gallery-cell__out:hover {
-      opacity: 0.65;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1005,39 +960,41 @@
         img.loading = "lazy";
         img.decoding = "async";
 
-        const cap = document.createElement("span");
-        cap.className = "gallery-cell__cap";
-        const titleLine = document.createElement("span");
-        titleLine.style.display = "block";
-        titleLine.textContent = p.title;
-        cap.appendChild(titleLine);
-        if (p.note) {
-          const note = document.createElement("span");
-          note.className = "gallery-cell__note";
-          note.textContent = p.note;
-          cap.appendChild(note);
-        }
-        const meta = document.createElement("span");
-        meta.className = "gallery-cell__meta";
+        const body = document.createElement("div");
+        body.className = "card-body";
+
+        const h3 = document.createElement("h3");
+        h3.className = "card-title";
+        h3.textContent = p.title;
+        body.appendChild(h3);
+
+        const meta = document.createElement("p");
+        meta.className = "meta";
         const medium = T("paintingMedium", "Olej na płótnie");
         meta.textContent = `${medium} · ${p.size}`;
-        cap.appendChild(meta);
+        body.appendChild(meta);
 
-        cell.appendChild(img);
-        cell.appendChild(cap);
+        if (p.note) {
+          const note = document.createElement("p");
+          note.className = "award";
+          note.textContent = p.note;
+          body.appendChild(note);
+        }
 
         if (paintingPageUrl) {
-          const outWrap = document.createElement("p");
-          outWrap.className = "gallery-cell__outwrap";
+          const foot = document.createElement("div");
+          foot.className = "card-footer";
           const out = document.createElement("a");
-          out.className = "gallery-cell__out";
           out.href = paintingPageUrl;
           out.target = "_blank";
           out.rel = "noopener noreferrer";
           out.textContent = T("paintingOutLink", "Strona malarstwa");
-          outWrap.appendChild(out);
-          cell.appendChild(outWrap);
+          foot.appendChild(out);
+          body.appendChild(foot);
         }
+
+        cell.appendChild(img);
+        cell.appendChild(body);
 
         cell.addEventListener("click", (e) => {
           if (e.target.closest("a")) return;
