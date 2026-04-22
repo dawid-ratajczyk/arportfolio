@@ -246,8 +246,30 @@
     const KATALOG_PAGE_URL = "";
     const BIO_PAGE_URL = "";
 
+    /**
+     * true = ta strona to wyłącznie kontakt (np. inna nazwa hosta niż kontakt.*).
+     * Wtedy ukrywane są przyciski Portfolio i Bio — tak samo jak na hostach kontakt.domena.pl
+     */
+    const CONTACT_STANDALONE = false;
+
     /** Wpisz adres, np. "kontakt@domena.pl" — pojawi się karta z mailem. */
     const CONTACT_EMAIL = "andrzej_ratajczyk@o2.pl";
+
+    /**
+     * Subdomena kontaktu: pierwszy segment hosta to kontakt/contact
+     * (np. kontakt.domena.pl), ewentualnie www.kontakt.domena.pl.
+     * Na localhost / IP nie ukrywamy — ustaw CONTACT_STANDALONE.
+     */
+    function isContactSubdomainHost() {
+      var h = (location.hostname || "").toLowerCase();
+      if (!h || h === "localhost" || h === "127.0.0.1") return false;
+      var parts = h.split(".").filter(Boolean);
+      if (!parts.length) return false;
+      if (parts[0] === "www" && parts.length > 1) {
+        return parts[1] === "kontakt" || parts[1] === "contact";
+      }
+      return parts[0] === "kontakt" || parts[0] === "contact";
+    }
 
     (function () {
       const land = document.getElementById("kontakt-landing-link");
@@ -256,6 +278,15 @@
       if (kat && KATALOG_PAGE_URL.trim()) kat.href = KATALOG_PAGE_URL.trim();
       const bio = document.getElementById("kontakt-bio-link");
       if (bio && BIO_PAGE_URL.trim()) bio.href = BIO_PAGE_URL.trim();
+
+      if (CONTACT_STANDALONE || isContactSubdomainHost()) {
+        if (kat) {
+          kat.remove();
+        }
+        if (bio) {
+          bio.remove();
+        }
+      }
 
       const em = (CONTACT_EMAIL || "").trim();
       if (em) {

@@ -1,6 +1,5 @@
 /**
- * Globalny język strony (PL / EN): localStorage + pływający przełącznik.
- * Wymaga na stronie stylów .btn (jak w pozostałych plikach HTML).
+ * Globalny język strony (PL / EN): localStorage + jeden mały przycisk (tekst PL ↔ EN, role="switch").
  */
 (function () {
   var KEY = "portfolioLang";
@@ -8,6 +7,8 @@
   window.PORTFOLIO_I18N = {
     pl: {
       langGroupAria: "Język strony",
+      langSwitchToEn: "Przełącz na angielski",
+      langSwitchToPl: "Przełącz na polski",
       metaDescIndex:
         "Andrzej Ratajczyk — linoryt i malarstwo. Wejście do portfolio.",
       titleIndex: "Andrzej Ratajczyk — Linoryt & malarstwo",
@@ -32,8 +33,6 @@
       paintingOutLink: "Strona malarstwa",
       cardFooterLink: "Karta pracy",
       paintingMedium: "Olej na płótnie",
-      footerKatalog1: "Miniatury grafiki i malarstwa pochodzą z pliku danych portfolio (podgląd w tej witrynie).",
-      footerKatalog2: "Pełne rozdzielczości i opisy przy poszczególnych pozycjach na stronie źródłowej.",
       metaDescKontakt: "Andrzej Ratajczyk — kontakt i social media.",
       titleKontakt: "Andrzej Ratajczyk — Kontakt",
       kontaktNavAria: "Nawigacja",
@@ -56,6 +55,8 @@
     },
     en: {
       langGroupAria: "Site language",
+      langSwitchToEn: "Switch to English",
+      langSwitchToPl: "Switch to Polish",
       metaDescIndex: "Andrzej Ratajczyk — linocut and painting. Portfolio entry.",
       titleIndex: "Andrzej Ratajczyk — Linocut & painting",
       landingNavAria: "Bio and social media",
@@ -79,8 +80,6 @@
       paintingOutLink: "Painting gallery page",
       cardFooterLink: "Work page",
       paintingMedium: "Oil on canvas",
-      footerKatalog1: "Thumbnails come from the portfolio data file (preview on this site).",
-      footerKatalog2: "Full resolutions and descriptions are provided on the source page for each item.",
       metaDescKontakt: "Andrzej Ratajczyk — contact and social media.",
       titleKontakt: "Andrzej Ratajczyk — Contact",
       kontaktNavAria: "Navigation",
@@ -138,9 +137,10 @@
     if (!document.body) return;
 
     var css =
-      "#site-lang-switch.site-lang{position:fixed;top:0.75rem;right:clamp(0.65rem,2.5vw,1.25rem);z-index:50;display:flex;gap:0.35rem;align-items:center}" +
-      "#site-lang-switch.site-lang .btn{padding:0.42rem 0.72rem;min-width:2.35rem;justify-content:center}" +
-      "#site-lang-switch .lang-switch__btn.is-active{box-shadow:inset 0 0 0 1px rgba(255,255,255,0.72);color:#fff}";
+      "#site-lang-switch.site-lang{position:fixed;top:clamp(0.32rem,0.9vw,0.5rem);right:clamp(0.65rem,2.5vw,1.25rem);z-index:50;display:flex;align-items:center}" +
+      ".lang-switch{box-sizing:border-box;margin:0;padding:0 0.45rem;min-width:2.15rem;height:1.95rem;border:none;border-radius:999px;background:rgba(0,0,0,0.32);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08);font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.1em;color:#fafafa;cursor:pointer;-webkit-tap-highlight-color:transparent;line-height:1}" +
+      ".lang-switch:hover{background:rgba(255,255,255,0.06)}" +
+      ".lang-switch:focus-visible{outline:2px solid rgba(255,255,255,0.55);outline-offset:2px}";
 
     var st = document.createElement("style");
     st.setAttribute("data-portfolio-lang", "");
@@ -150,30 +150,26 @@
     var wrap = document.createElement("div");
     wrap.id = "site-lang-switch";
     wrap.className = "site-lang";
-    wrap.setAttribute("role", "group");
     wrap.innerHTML =
-      '<button type="button" class="btn btn--ghost lang-switch__btn" data-lang="pl" aria-pressed="false">PL</button>' +
-      '<button type="button" class="btn btn--ghost lang-switch__btn" data-lang="en" aria-pressed="false">EN</button>';
+      '<button type="button" id="lang-switch-btn" class="lang-switch" role="switch" aria-checked="false">PL</button>';
     document.body.appendChild(wrap);
 
-    wrap.addEventListener("click", function (e) {
-      var b = e.target && e.target.closest && e.target.closest(".lang-switch__btn[data-lang]");
-      if (!b || !wrap.contains(b)) return;
-      set(b.getAttribute("data-lang") || "pl");
-    });
+    var sw = document.getElementById("lang-switch-btn");
+    if (sw) {
+      sw.addEventListener("click", function () {
+        set(get() === "en" ? "pl" : "en");
+      });
+    }
   }
 
   function syncLangButtons() {
     var cur = get();
-    var label = window.portfolioT("langGroupAria");
-    var wrap = document.getElementById("site-lang-switch");
-    if (wrap) wrap.setAttribute("aria-label", label);
-
-    document.querySelectorAll(".lang-switch__btn[data-lang]").forEach(function (btn) {
-      var on = btn.getAttribute("data-lang") === cur;
-      btn.setAttribute("aria-pressed", on ? "true" : "false");
-      btn.classList.toggle("is-active", on);
-    });
+    var btn = document.getElementById("lang-switch-btn");
+    if (!btn) return;
+    var enOn = cur === "en";
+    btn.setAttribute("aria-checked", enOn ? "true" : "false");
+    btn.textContent = enOn ? "EN" : "PL";
+    btn.setAttribute("aria-label", enOn ? window.portfolioT("langSwitchToPl") : window.portfolioT("langSwitchToEn"));
   }
 
   function syncLangBlocks() {
