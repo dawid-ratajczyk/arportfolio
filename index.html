@@ -186,6 +186,19 @@
       }
     }
 
+    .landing__shop-bar {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: 0 0 clamp(1rem, 2.2vw, 1.35rem);
+      min-width: 0;
+    }
+
+    .landing__shop-cta {
+      min-width: min(100%, 14rem);
+      justify-content: center;
+    }
+
     .landing__spot {
       display: flex;
       justify-content: flex-start;
@@ -328,11 +341,15 @@
         <nav class="landing__nav" data-i18n-attr="aria-label:landingNavAria" aria-label="Bio i social media">
           <a class="btn btn--solid" id="landing-link-bio" href="./bio.html" data-i18n="navBio">Bio</a>
           <a class="btn btn--ghost" id="landing-link-kontakt" href="./kontakt.html" data-i18n="navContact">Kontakt</a>
+          <a class="btn btn--ghost" id="landing-link-store" href="./store.html" data-i18n="navStore">Sklep</a>
           <a class="btn btn--ghost" href="https://www.instagram.com/andyrx/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a class="btn btn--ghost" href="https://www.facebook.com/profile.php?id=100090307976991" target="_blank" rel="noopener noreferrer">Facebook</a>
         </nav>
       </div>
       <div class="landing__preview">
+        <div class="landing__shop-bar">
+          <a href="./store.html" id="landing-store-cta" class="btn btn--solid landing__shop-cta" data-i18n="navStore">Sklep</a>
+        </div>
         <div class="landing__dual">
           <div class="landing__spot">
             <div class="landing__col">
@@ -380,6 +397,9 @@
      * Gdy puste i ustawiony CONTACT_EMAIL — przycisk „Kontakt” otwiera mailto zamiast pliku.
      */
     const KONTAKT_PAGE_URL = "";
+
+    /** Strona sklepu (store.html). Puste = ./store.html obok index.html. */
+    const STORE_PAGE_URL = "";
 
     function catalogBaseUrl() {
       const raw = (CATALOG_PAGE_URL || "").trim();
@@ -499,6 +519,23 @@
           kontakt.removeAttribute("rel");
         }
       }
+
+      function applyStoreHref(el) {
+        if (!el) return;
+        if (STORE_PAGE_URL.trim()) {
+          const u = STORE_PAGE_URL.trim();
+          el.href = u;
+          if (/^https?:\/\//i.test(u)) {
+            el.target = "_blank";
+            el.rel = "noopener noreferrer";
+          } else {
+            el.removeAttribute("target");
+            el.removeAttribute("rel");
+          }
+        }
+      }
+      applyStoreHref(document.getElementById("landing-link-store"));
+      applyStoreHref(document.getElementById("landing-store-cta"));
     }
 
     initLanding();

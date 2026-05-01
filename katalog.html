@@ -585,6 +585,7 @@
               >
                 <span data-i18n="catalogHome">Strona główna</span>
               </a>
+              <a class="btn btn--ghost" id="catalog-store-link" href="./store.html" data-i18n="navStore">Sklep</a>
               <a class="btn btn--ghost" id="catalog-kontakt-link" href="./kontakt.html" data-i18n="navContact">Kontakt</a>
               <div class="tabs tabs--segmented" role="tablist" data-i18n-attr="aria-label:tabsAria" aria-label="Widok portfolio">
                 <button type="button" class="tabs__btn is-active" role="tab" id="tab-grafika" aria-selected="true" aria-controls="panel-grafika" data-tab="grafika" data-i18n="tabGraphics">
@@ -643,6 +644,9 @@
     /** Strona kontaktu (np. subdomena). Puste = ./kontakt.html. */
     const KONTAKT_PAGE_URL = "";
 
+    /** Strona sklepu (store.html). Puste = ./store.html. */
+    const STORE_PAGE_URL = "";
+
     /** Gdy brak KONTAKT_PAGE_URL: opcjonalny mailto zamiast ./kontakt.html */
     const CONTACT_EMAIL = "";
 
@@ -659,6 +663,19 @@
     const tabsInOrder = [tabGrafika, tabPaintings];
     const landingLink = document.getElementById("catalog-landing-link");
     if (landingLink && LANDING_PAGE_URL.trim()) landingLink.href = LANDING_PAGE_URL.trim();
+
+    const storeLink = document.getElementById("catalog-store-link");
+    if (storeLink && STORE_PAGE_URL.trim()) {
+      const u = STORE_PAGE_URL.trim();
+      storeLink.href = u;
+      if (/^https?:\/\//i.test(u)) {
+        storeLink.target = "_blank";
+        storeLink.rel = "noopener noreferrer";
+      } else {
+        storeLink.removeAttribute("target");
+        storeLink.removeAttribute("rel");
+      }
+    }
 
     const kontaktLink = document.getElementById("catalog-kontakt-link");
     if (kontaktLink) {
