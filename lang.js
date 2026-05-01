@@ -58,8 +58,6 @@
       navStore: "Sklep",
       storeCatalogLink: "Portfolio — grafika",
       storeH1: "Sklep — druki",
-      storeLead:
-        "Druki linorytów z tej samej kolekcji co w portfolio. Zamówienie i płatność w sklepie Shopify — przycisk „Kup” otwiera stronę produktu (handle musi zgadzać się z importem CSV).",
       storeConfigBanner:
         "Ustaw w pliku store.html zmienną SHOPIFY_STORE_ORIGIN (np. https://twoja-domena.pl), żeby przyciski prowadziły do produktów.",
       storeBuy: "Kup",
@@ -116,8 +114,6 @@
       navStore: "Shop",
       storeCatalogLink: "Portfolio — graphics",
       storeH1: "Shop — prints",
-      storeLead:
-        "Linocut prints from the same collection as the portfolio. Checkout runs on Shopify — “Buy” opens the product page (handle must match your CSV import).",
       storeConfigBanner:
         "Set SHOPIFY_STORE_ORIGIN in store.html (e.g. https://your-domain.com) so buttons link to products.",
       storeBuy: "Buy",

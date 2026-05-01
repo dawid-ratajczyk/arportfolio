@@ -186,19 +186,6 @@
       }
     }
 
-    .landing__shop-bar {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin: 0 0 clamp(1rem, 2.2vw, 1.35rem);
-      min-width: 0;
-    }
-
-    .landing__shop-cta {
-      min-width: min(100%, 14rem);
-      justify-content: center;
-    }
-
     .landing__spot {
       display: flex;
       justify-content: flex-start;
@@ -347,9 +334,6 @@
         </nav>
       </div>
       <div class="landing__preview">
-        <div class="landing__shop-bar">
-          <a href="./store.html" id="landing-store-cta" class="btn btn--solid landing__shop-cta" data-i18n="navStore">Sklep</a>
-        </div>
         <div class="landing__dual">
           <div class="landing__spot">
             <div class="landing__col">
@@ -535,7 +519,6 @@
         }
       }
       applyStoreHref(document.getElementById("landing-link-store"));
-      applyStoreHref(document.getElementById("landing-store-cta"));
     }
 
     initLanding();

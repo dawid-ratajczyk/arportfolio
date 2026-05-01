@@ -42,7 +42,6 @@ window.PORTFOLIO_DATA = {
       { title: "Cubic Space 2", href: "", technique: "linoryt", size: "30×30 cm", image: "./images/2019/06/cubicspace2_print-30x30_-paper-48x48.jpg" },
       { title: "Cubic Space", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/2023/03/cubicspace.jpg" },
       { title: "On the Moon 1", href: "", technique: "linoryt", size: "45×37 cm", image: "./images/2023/03/onthemoon-1-1.jpg" },
-      { title: "Plural Melts — Dunmore Caves (Yvonne Lambert)", href: "", technique: "linoryt", size: "50×70 cm", note: "Szczegóły: artviewer.org — wystawa", image: "./images/2019/02/9-1.jpg" },
       { title: "Apocalypse", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/2023/03/apokalipsa.jpg" },
       { title: "Square Space", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/2023/03/squarespace.jpg" },
       { title: "Space Hole", href: "", technique: "linoryt", size: "50×66 cm", image: "./images/2023/03/Holespace-1.jpg" },
