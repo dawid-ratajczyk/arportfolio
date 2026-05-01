@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Andrzej Ratajczyk — druki: linoryt. Zamówienia w sklepie Shopify." />
+  <title>Andrzej Ratajczyk — Sklep / druki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0c0f;
+      --bg-subtle: #16161c;
+      --card: #121218;
+      --fg: #fafafa;
+      --muted: #a1a1aa;
+      --line: #2e2e36;
+      --warn: #f59e0b;
+      --warn-bg: rgba(245, 158, 11, 0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--fg);
+      line-height: 1.55;
+      background: var(--bg);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 100% 6rem;
+      background-position: 0 4.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: clamp(18rem, 48vh, 34rem);
+      pointer-events: none;
+      z-index: 0;
+      background-color: var(--bg);
+      background-image: linear-gradient(
+        to bottom,
+        rgba(12, 12, 15, 0.55) 0%,
+        rgba(12, 12, 15, 0.82) 38%,
+        var(--bg) 100%
+      );
+      background-size: 100% 100%;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+    }
+
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.055;
+      mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 76rem;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      min-width: 0;
+    }
+
+    .catalog-header-panel {
+      margin: 0 0 clamp(1.75rem, 3vw, 2.5rem);
+      padding: clamp(1.15rem, 2.8vw, 1.75rem);
+      min-width: 0;
+      background: linear-gradient(168deg, rgba(22, 22, 30, 0.92) 0%, rgba(12, 12, 16, 0.88) 48%, rgba(14, 14, 18, 0.94) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.05) inset,
+        0 28px 56px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .catalog-header-panel {
+        background: rgba(18, 18, 24, 0.94);
+      }
+    }
+
+    .catalog-header-panel__actions-row {
+      margin-bottom: clamp(1rem, 2vw, 1.35rem);
+      padding-bottom: clamp(0.85rem, 1.5vw, 1.1rem);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .catalog-top__bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 0.75rem;
+    }
+
+    .catalog-top__bar-start {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 0.75rem;
+      min-width: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.15rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn--solid {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .btn--solid:hover,
+    .btn--solid:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--fg);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .btn--ghost:hover,
+    .btn--ghost:focus-visible {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .btn--block {
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn--muted {
+      opacity: 0.45;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    main {
+      padding: clamp(1.15rem, 3vw, 1.85rem) 0 4rem;
+    }
+
+    .store-intro h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.65rem, 4vw, 2.15rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 0.65rem;
+    }
+
+    .store-intro p {
+      margin: 0 0 1.25rem;
+      max-width: 40rem;
+      color: var(--muted);
+      font-size: 0.9375rem;
+    }
+
+    .store-config-banner {
+      margin-bottom: 1.25rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: #fde68a;
+      background: var(--warn-bg);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(1rem, 2vw, 1.25rem);
+    }
+
+    @media (min-width: 36rem) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 56rem) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    article.store-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    article.store-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .card-thumb {
+      position: relative;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .card-thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      background: #0a0a0c;
+    }
+
+    .card-body {
+      padding: 1rem 1.1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+
+    .card-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .meta {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 0.65rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      article.store-card { transition: none; }
+      article.store-card:hover { transform: none; }
+      .btn { transition: none; }
+      .btn--solid:hover,
+      .btn--solid:focus-visible,
+      .btn--ghost:hover,
+      .btn--ghost:focus-visible {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body data-page="store">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-backdrop" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <main>
+      <div class="catalog-header-panel">
+        <header class="catalog-header-panel__actions-row">
+          <nav class="catalog-top__bar" data-i18n-attr="aria-label:catalogNavAria" aria-label="Nawigacja witryny">
+            <div class="catalog-top__bar-start">
+              <a
+                href="./index.html"
+                class="btn btn--solid"
+                data-i18n-attr="aria-label:catalogHomeAria"
+                aria-label="Strona główna witryny"
+              >
+                <span data-i18n="catalogHome">Strona główna</span>
+              </a>
+              <a class="btn btn--ghost" href="./katalog.html#grafika" data-i18n="storeCatalogLink">Portfolio — grafika</a>
+              <a class="btn btn--ghost" href="./kontakt.html" data-i18n="navContact">Kontakt</a>
+            </div>
+          </nav>
+        </header>
+
+        <div class="store-intro">
+          <h1 data-i18n="storeH1">Sklep — druki</h1>
+          <p data-i18n="storeLead">
+            Druki linorytów z tej samej kolekcji co w portfolio. Zamówienie i płatność realizowane w sklepie Shopify —
+            kliknij „Kup w sklepie” przy wybranej pracy.
+          </p>
+          <p id="store-config-banner" class="store-config-banner" data-i18n="storeConfigBanner"></p>
+        </div>
+      </div>
+
+      <div class="grid" id="store-grid" role="list"></div>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="lang.js"></script>
+  <script>
+    /**
+     * Publiczny adres sklepu Shopify (domena główna, bez ścieżki), np.:
+     * "https://twoj-sklep.myshopify.com" lub "https://twoja-domena.pl"
+     * Handle produktu = slug z importu CSV (np. stanczyki → /products/stanczyki).
+     */
+    const SHOPIFY_STORE_ORIGIN = "https://arlinoryt.myshopify.com/";
+
+    function slugTitle(s) {
+      return (
+        s
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/\p{M}/gu, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "")
+          .slice(0, 80) || "work"
+      );
+    }
+
+    function productUrl(handle) {
+      const b = (SHOPIFY_STORE_ORIGIN || "").trim().replace(/\/$/, "");
+      if (!b) return null;
+      return `${b}/products/${encodeURIComponent(handle)}`;
+    }
+
+    function syncConfigBanner() {
+      const el = document.getElementById("store-config-banner");
+      if (!el) return;
+      el.hidden = !!(SHOPIFY_STORE_ORIGIN || "").trim();
+    }
+
+    function buyLabel() {
+      return window.portfolioT ? window.portfolioT("storeBuy") : "Kup w sklepie";
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById("store-grid");
+      if (!grid || !window.PORTFOLIO_DATA) return;
+      const works = window.PORTFOLIO_DATA.works || [];
+      grid.innerHTML = "";
+
+      works.forEach((w) => {
+        const handle = slugTitle(w.title);
+        const url = productUrl(handle);
+        const metaBits = [w.technique, w.size].filter(Boolean);
+        const meta = metaBits.join(" · ");
+
+        const art = document.createElement("article");
+        art.className = "store-card";
+        art.setAttribute("role", "listitem");
+
+        const thumb = document.createElement("div");
+        thumb.className = "card-thumb";
+        const img = document.createElement("img");
+        img.src = w.image;
+        img.alt = w.subtitle ? `${w.title} — ${w.subtitle}` : w.title;
+        img.loading = "lazy";
+        img.decoding = "async";
+        thumb.appendChild(img);
+
+        const body = document.createElement("div");
+        body.className = "card-body";
+        const h2 = document.createElement("h2");
+        h2.className = "card-title";
+        h2.textContent = w.title;
+        const metaEl = document.createElement("p");
+        metaEl.className = "meta";
+        metaEl.textContent = meta;
+
+        const foot = document.createElement("div");
+        foot.className = "card-footer";
+        const a = document.createElement("a");
+        a.className = "btn btn--solid btn--block store-buy";
+        a.textContent = buyLabel();
+        if (url) {
+          a.href = url;
+          a.rel = "noopener noreferrer";
+          a.target = "_blank";
+        } else {
+          a.href = "#";
+          a.classList.add("btn--muted");
+          a.setAttribute("aria-disabled", "true");
+        }
+        foot.appendChild(a);
+
+        body.appendChild(h2);
+        body.appendChild(metaEl);
+        body.appendChild(foot);
+
+        art.appendChild(thumb);
+        art.appendChild(body);
+        grid.appendChild(art);
+      });
+    }
+
+    renderGrid();
+    syncConfigBanner();
+
+    window.addEventListener("portfoliolangchange", function () {
+      syncConfigBanner();
+      document.querySelectorAll("a.store-buy").forEach(function (a) {
+        a.textContent = buyLabel();
+      });
+    });
+  </script>
+</body>
+</html>
