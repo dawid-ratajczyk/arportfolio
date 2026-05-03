@@ -22,7 +22,7 @@ window.PORTFOLIO_DATA = {
     { title: "Inside Space", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/shop-druki/inside-space.jpg" },
     { title: "Interitus Fatum", href: "", technique: "linoryt", size: "50×70 cm", award: "Finał i wystawa Międzynarodowego Biennale Grafiki R.O.C., 2022, Tajpej", image: "./images/shop-druki/interitus-fatum.jpg" },
     { title: "Landing Space", href: "", technique: "linoryt", size: "50×66 cm", image: "./images/shop-druki/landing-space.jpg" },
-    { title: "Laokoon", href: "", technique: "linoryt", size: "70×50 cm", image: "./images/shop-druki/laokoon.jpg" },
+    { title: "Umbra Gloriae", href: "", technique: "linoryt", size: "70×50 cm", image: "./images/shop-druki/laokoon.jpg" },
     { title: "Lost Pyramid", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/shop-druki/lost-pyramid.jpg" },
     { title: "Melancholy", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/shop-druki/melancholy.jpg" },
     { title: "Memory of Space", href: "", technique: "linoryt", size: "60×40 cm", image: "./images/shop-druki/memory-of-space.jpg" },
