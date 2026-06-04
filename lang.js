@@ -51,7 +51,6 @@
       titleBio: "Andrzej Ratajczyk · Biografia",
       bioNavAria: "Nawigacja",
       bioBack: "Powrót do portfolio",
-      bioCatalog: "Portfolio",
       bioContact: "Kontakt",
       footerBio: "Andrzej Ratajczyk, biografia.",
       metaDescStore:
@@ -109,7 +108,6 @@
       titleBio: "Andrzej Ratajczyk · Biography",
       bioNavAria: "Navigation",
       bioBack: "Back to portfolio",
-      bioCatalog: "Portfolio",
       bioContact: "Contact",
       footerBio: "Andrzej Ratajczyk, biography.",
       metaDescStore:
