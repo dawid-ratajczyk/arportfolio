@@ -211,6 +211,26 @@
       gap: 0.65rem;
     }
 
+    .landing__figure-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .landing__figure-link:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.55);
+      outline-offset: 3px;
+    }
+
+    .landing__figure-link:hover .landing__figure,
+    .landing__figure-link:focus-visible .landing__figure {
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
     .landing__figure {
       margin: 0;
       display: flex;
@@ -225,6 +245,7 @@
       overflow: hidden;
       background: radial-gradient(ellipse 120% 80% at 50% 40%, #15151a 0%, #0a0a0c 72%);
       box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
     .landing__figure img {
@@ -297,6 +318,11 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+      .landing__figure { transition: none; }
+      .landing__figure-link:hover .landing__figure,
+      .landing__figure-link:focus-visible .landing__figure {
+        transform: none;
+      }
       .btn { transition: none; }
       .btn--solid:hover,
       .btn--solid:focus-visible,
@@ -338,17 +364,33 @@
           <div class="landing__spot">
             <div class="landing__col">
               <a href="katalog.html#grafika" id="landing-cta-grafika" class="btn btn--solid landing__cta" data-i18n="ctaGraphics">Grafika</a>
-              <figure class="landing__figure">
-                <img id="landing-img-grafika" alt="" decoding="async" />
-              </figure>
+              <a
+                href="katalog.html#grafika"
+                id="landing-figure-link-grafika"
+                class="landing__figure-link"
+                data-i18n-attr="aria-label:ctaGraphics"
+                aria-label="Grafika"
+              >
+                <figure class="landing__figure">
+                  <img id="landing-img-grafika" alt="" decoding="async" />
+                </figure>
+              </a>
             </div>
           </div>
           <div class="landing__spot">
             <div class="landing__col">
               <a href="katalog.html#malarstwo" id="landing-cta-malarstwo" class="btn btn--ghost landing__cta" data-i18n="ctaPainting">Malarstwo</a>
-              <figure class="landing__figure">
-                <img id="landing-img-malarstwo" alt="" decoding="async" />
-              </figure>
+              <a
+                href="katalog.html#malarstwo"
+                id="landing-figure-link-malarstwo"
+                class="landing__figure-link"
+                data-i18n-attr="aria-label:ctaPainting"
+                aria-label="Malarstwo"
+              >
+                <figure class="landing__figure">
+                  <img id="landing-img-malarstwo" alt="" decoding="async" />
+                </figure>
+              </a>
             </div>
           </div>
         </div>
@@ -447,10 +489,16 @@
       const imgP = document.getElementById("landing-img-malarstwo");
       const ctaG = document.getElementById("landing-cta-grafika");
       const ctaP = document.getElementById("landing-cta-malarstwo");
+      const figLinkG = document.getElementById("landing-figure-link-grafika");
+      const figLinkP = document.getElementById("landing-figure-link-malarstwo");
       if (!imgG || !imgP || !ctaG || !ctaP || !works || !paintings) return;
 
-      ctaG.href = catalogHref("#grafika");
-      ctaP.href = catalogHref("#malarstwo");
+      const hrefGrafika = catalogHref("#grafika");
+      const hrefMalarstwo = catalogHref("#malarstwo");
+      ctaG.href = hrefGrafika;
+      ctaP.href = hrefMalarstwo;
+      if (figLinkG) figLinkG.href = hrefGrafika;
+      if (figLinkP) figLinkP.href = hrefMalarstwo;
 
       const bioLink = document.getElementById("landing-link-bio");
       if (bioLink) {

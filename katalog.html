@@ -254,6 +254,23 @@
       flex: 1;
     }
 
+    .painting-status {
+      margin: 0.2rem 0 0;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    .painting-status--sold {
+      color: #f87171;
+    }
+
+    .painting-status--available {
+      color: #86efac;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -826,6 +843,7 @@
       det.className = "work-lightbox__detail";
       det.textContent = `${medium} · ${p.size}`;
       workLightboxMeta.appendChild(det);
+      appendPaintingStatus(workLightboxMeta, p);
       if (p.note) {
         const ex = document.createElement("p");
         ex.className = "work-lightbox__award";
@@ -891,6 +909,18 @@
       if (!b) return null;
       const handle = slugTitle(title);
       return `${b}/products/${encodeURIComponent(handle)}`;
+    }
+
+    function paintingIsSold(p) {
+      return p && p.sold === true;
+    }
+
+    function appendPaintingStatus(parent, p) {
+      const st = document.createElement("p");
+      const sold = paintingIsSold(p);
+      st.className = sold ? "painting-status painting-status--sold" : "painting-status painting-status--available";
+      st.textContent = sold ? T("paintingStatusSold", "Sprzedane") : T("paintingStatusAvailable", "Dostępne");
+      parent.appendChild(st);
     }
 
     function render() {
@@ -1021,6 +1051,7 @@
         const medium = T("paintingMedium", "Olej na płótnie");
         meta.textContent = `${medium} · ${p.size}`;
         body.appendChild(meta);
+        appendPaintingStatus(body, p);
 
         if (p.note) {
           const note = document.createElement("p");
