@@ -4,7 +4,7 @@ window.PORTFOLIO_DATA = {
   PAINTINGS_PAGE: '',
   works: [
     { title: "Absolute Gravitas", href: "", technique: "linoryt", size: "50×50 cm", award: "Finał i wystawa XV Ogólnopolskiego Konkursu Grafiki im. Józefa Gielniaka, 2022, Jelenia Góra", image: "./images/shop-druki/absolute-gravitas.jpg" },
-    { title: "Apocalypse", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/shop-druki/apocalypse.jpg" },
+    { title: "Apocalypse", href: "", technique: "linoryt", size: "50×60 cm", image: "./images/shop-druki/apocalypse.jpg" },
     { title: "Canyon Space", href: "", technique: "linoryt", size: "30×40 cm", image: "./images/shop-druki/canyon-space.jpg" },
     { title: "Cubic Space", href: "", technique: "linoryt", size: "50×70 cm", image: "./images/shop-druki/cubic-space.jpg" },
     { title: "Cubic Space 3", href: "", technique: "linoryt", size: "55×75 cm", image: "./images/shop-druki/cubic-space-3.jpg" },
