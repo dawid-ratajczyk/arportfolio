@@ -58,7 +58,7 @@
       titleStore: "Andrzej Ratajczyk — Sklep / druki",
       navStore: "Sklep",
       storeCatalogLink: "Portfolio — grafika",
-      storeH1: "Sklep — druki",
+      storeH1: "Grafiki",
       storeConfigBanner:
         "Ustaw w pliku store.html zmienną SHOPIFY_STORE_ORIGIN (np. https://twoja-domena.pl), żeby przyciski prowadziły do produktów.",
       storeBuy: "Kup",
@@ -115,7 +115,7 @@
       titleStore: "Andrzej Ratajczyk — Shop / prints",
       navStore: "Shop",
       storeCatalogLink: "Portfolio — graphics",
-      storeH1: "Shop — prints",
+      storeH1: "Prints",
       storeConfigBanner:
         "Set SHOPIFY_STORE_ORIGIN in store.html (e.g. https://your-domain.com) so buttons link to products.",
       storeBuy: "Buy",
