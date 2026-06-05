@@ -55,6 +55,7 @@ window.PORTFOLIO_DATA = {
     { title: "Oblitus Spatium", size: "90×120 cm", image: "./images/2024/05/oblitus-spatium-www.jpg" },
     { title: "Galatea", size: "90×70 cm", image: "./images/2024/09/Galateasmall-2.jpg" },
     { title: "Finis vitae", size: "90×70 cm", image: "./images/2024/11/Finis-vitae.jpg" },
+    { title: "Finis vitae II", size: "70×80 cm", image: "./images/2024/11/Finis-vitae-II-70x80.jpg" },
     { title: "Relicta saecularia", size: "75×60 cm", image: "./images/2025/06/relicta-saecularia75x60.jpg" },
     { title: "Aquila nebula", size: "61×50 cm", image: "./images/2025/01/Aquila-nebula.jpg" },
     { title: "Equus caput nebula", size: "61×50 cm", image: "./images/2025/02/equus-caput-nebula.jpg" },
