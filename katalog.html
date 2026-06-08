@@ -271,6 +271,14 @@
       color: #86efac;
     }
 
+    .painting-price {
+      margin: 0.35rem 0 0;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #e4e4e7;
+      letter-spacing: 0.02em;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -843,6 +851,7 @@
       det.className = "work-lightbox__detail";
       det.textContent = `${medium} · ${p.size}`;
       workLightboxMeta.appendChild(det);
+      appendPaintingPrice(workLightboxMeta, p);
       appendPaintingStatus(workLightboxMeta, p);
       if (p.note) {
         const ex = document.createElement("p");
@@ -913,6 +922,24 @@
 
     function paintingIsSold(p) {
       return p && p.sold === true;
+    }
+
+    function formatPaintingPrice(price) {
+      const n = Number(price);
+      if (!Number.isFinite(n) || n <= 0) return "";
+      const amount = Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      const cur = T("paintingPriceCurrency", "PLN");
+      return `${amount},- ${cur}`;
+    }
+
+    function appendPaintingPrice(parent, p) {
+      if (paintingIsSold(p)) return;
+      const text = formatPaintingPrice(p.price);
+      if (!text) return;
+      const el = document.createElement("p");
+      el.className = "painting-price";
+      el.textContent = text;
+      parent.appendChild(el);
     }
 
     function appendPaintingStatus(parent, p) {
@@ -1051,6 +1078,7 @@
         const medium = T("paintingMedium", "Olej na płótnie");
         meta.textContent = `${medium} · ${p.size}`;
         body.appendChild(meta);
+        appendPaintingPrice(body, p);
         appendPaintingStatus(body, p);
 
         if (p.note) {
